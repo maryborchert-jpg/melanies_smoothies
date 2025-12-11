@@ -22,7 +22,7 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 
 #Convert the Snowpark dataframe to a Pandas Dataframe so we can use the LOC function
 pd_df = my_dataframe.to_pandas()
-st.dataframe(pd_df)
+#st.dataframe(pd_df)
 
 #This section creates the multiselect box
 ingredients_list = st.multiselect (
@@ -41,7 +41,7 @@ if ingredients_list: #If ingredients_list is not null, do everything below this 
         st.write('The search value for ', fruit_chosen, ' is ', search_on, '.')
         st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
-        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width = True)
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), width = 'stretch')
 
 
     my_insert_stmt = """insert into smoothies.public.orders(ingredients, name_on_order) values ('""" + ingredients_string + """','""" + name_on_order + """')"""
